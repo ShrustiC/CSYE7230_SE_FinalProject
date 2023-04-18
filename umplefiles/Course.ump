@@ -1,0 +1,343 @@
+class Course
+{
+  courseID;
+  courseName;
+  Integer level;
+  description;
+  Double price;
+  1 -- 1 CourseSingletonFactory;
+}
+
+class Resource
+{
+  resourceID;
+  resourceName;
+  description;
+  link;
+  Enum resourceType;
+  
+  1..* -- 1 Course;
+}
+
+class School
+{
+  schoolID;
+  schoolName;
+  
+  1 -- 1..* Course;
+  1 -- * Student;
+}
+
+class Domain
+{
+  domainID;
+  domainName;
+  description;
+  1..* -- 1..* Course;
+}
+
+class Assessment
+{
+  assessmentID;
+  assessmentName;
+  description;
+  
+  1..* -- 1 Course;
+  1 -- 1 Grade;
+}
+
+class CourseSingletonFactory
+{
+  CourseSingletonFactory instance;
+  public Course getObject(){
+    
+  }
+}
+
+class JobPosting
+{
+  jobID;
+  jobName;
+  Integer level;
+}
+
+class Company
+{
+  isA User;
+  companyID;
+  companyName;
+  
+  1 -- 0..* JobPosting;
+}
+
+class Recruiter
+{
+  isA User;
+  recruiterID;
+  recruiterName;
+}
+
+class Grade
+{
+  gradeID;
+  grade;
+  
+  * -- 1 Course;
+  * -- 1 Student;
+}
+
+class Enrollment
+{
+  enrollmentID;
+  Date enrolledOn;
+  
+  0..* -- 1 Course;
+  * -- 1 Student;
+}
+
+class Certificate
+{
+  
+  certificateID;
+  certificateName;
+  DateTime issueDate;
+  * -- 1 Student;
+}
+
+class TA
+{
+  
+  isA User;
+  taID;
+  taName;
+  
+  1..* -- 1 Course;
+}
+
+class Instructor
+{
+  
+  isA User;
+  instructorID;
+  instructorName;
+  
+  1 -- * Course;
+  * -- 1 School;
+}
+
+class User
+{
+  isA Role;
+  userID;
+  Enum userType;
+  email;
+  Integer status;
+  DateTime registrationDate;
+  contact;
+}
+
+class Event
+{
+  eventID;
+  eventType;
+  DateTime startTime;
+  DateTime endTime;
+  * -- * User;
+}
+
+class Admin
+{
+  isA Role;
+  adminID;
+}
+
+class Student
+{
+  isA User;
+  studentID;
+  studentName;
+  university;
+  major;
+  List enrolledCourses;
+  List completeCourses;
+}
+
+class StudentSingletonFactory
+{
+  StudentSingletonFactory instance;
+  public Student getObject(){
+  }
+  1 -- 1 Student;
+}
+
+class Role
+{
+  roleID;
+  userName;
+  password;
+}
+
+class PaymentAPI
+{
+  paymentID;
+  DateTime paymentDate;
+  Double amount;
+  * -- 1 Student;
+}
+
+class OnlinePayment
+{
+  isA PaymentAPI;
+  paymentType paymentType;
+}
+
+class Cheque
+{
+  isA PaymentAPI;
+  DateTime validUntil;
+}
+
+enum PaymentType{CreditCard,DebitCard}
+//$?[End_of_model]$?
+
+namespace -;
+
+
+class Course
+{
+  position 376 307 158.5 146.359;
+    position.association Course__CourseSingletonFactory 80,146 129,0;
+  position.association Course__CourseSingletonFactory 66,134 116,0;
+  position.association Course__CourseSingletonFactory 76,146 125,0;
+}
+
+class Resource
+{
+  position 23 431 172.125 146.359;
+  position.association Course__Resource 173,69 0,132;
+}
+
+class School
+{
+  position 23 185 156.625 95.3594;
+  position.association Course__School 158,48 0,38;
+  position.association School__Student 158,44 0,77;
+}
+
+class Domain
+{
+  position 23 301 163.922 112.359;
+  position.association Course__Domain 165,61 0,87;
+}
+
+class Assessment
+{
+  position 22 52 192.781 112.359;
+  position.association Assessment__Course 194,112 15,0;
+  position.association Assessment__Grade 194,10 0,10;
+}
+
+class CourseSingletonFactory
+{
+  position 327 515 248.922 93.5;
+}
+
+class JobPosting
+{
+  position 330 655 135.438 112.359;
+}
+
+class Company
+{
+  position 625 661 174.969 95.3594;
+  position.association Company__Course 0,10 99,146;
+  position.association Company__JobPosting 0,50 136,49;
+}
+
+class Recruiter
+{
+  position 628 781 171.688 95.3594;
+}
+
+class Grade
+{
+  position 387 52 129.469 95.3594;
+  position.association Course__Grade 69,95 53,0;
+  position.association Grade__Student 130,49 0,35;
+}
+
+class Enrollment
+{
+  position 628 168 163.516 95.3594;
+  position.association Course__Enrollment 0,10 103,0;
+  position.association Enrollment__Student 165,54 0,94;
+}
+
+class Certificate
+{
+  position 627 279 180.422 112.359;
+  position.association Certificate__Course 0,10 126,0;
+  position.association Certificate__Student 181,26 0,159;
+}
+
+class TA
+{
+  position 625 402 127.719 95.3594;
+  position.association Course__TA 0,10 160,79;
+}
+
+class Instructor
+{
+  position 629 538 178.844 95.3594;
+  position.association Course__Instructor 0,10 153,146;
+  position.association Instructor__School 0,17 158,74;
+}
+
+class User
+{
+  position 922 419 206.609 222.359;
+}
+
+class Event
+{
+  position 946 665 162.375 259.359;
+  position.association Event__User 117,0 163,163;
+}
+
+class Admin
+{
+  position 1278 707 64.2656 150.5;
+}
+
+class Student
+{
+  position 879 152 172.844 163.359;
+  position.association Student__StudentSingletonFactory 108,0 115,77;
+}
+
+class StudentSingletonFactory
+{
+  position 854 0 255.234 95.3594;
+  position.association Student__StudentSingletonFactory 108,0 143,0;
+}
+
+class Role
+{
+  position 1236 458 109 153.359;
+  }
+
+class OnlinePayment
+{
+  position 1288 281 109 109.5;
+}
+
+class Cheque
+{
+  position 1125 287 109 94.3594;
+}
+
+class PaymentAPI
+{
+  position 1148 41 188.625 112.359;
+  position.association PaymentAPI__Student 0,45 174,62;
+}
